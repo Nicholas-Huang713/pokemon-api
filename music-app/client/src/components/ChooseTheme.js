@@ -2,7 +2,6 @@ import React from 'react';
 import {getJwt} from '../helpers/jwt';
 import axios from 'axios';
 
-
 class ChooseTheme extends React.Component {
     constructor(props){
         super(props);

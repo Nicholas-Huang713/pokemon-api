@@ -2,14 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path = require('path');
-const dotenv = require('dotenv');
+const dotenv = require('./dotenv');
 
 const app = express(); 
 const PORT = process.env.PORT || 8003;
 
 const routes = require('./routes/api')
 dotenv.config();
-
 
 mongoose.connect( 
     process.env.DB_CONNECT,

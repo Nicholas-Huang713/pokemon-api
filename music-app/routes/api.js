@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Users = require('../models/users');
 const jwt = require('jsonwebtoken');
-const {registerValidation, loginValidation} = require('../validation');
+const {registerValidation, loginValidation} = require('../client/validation');
 const bcrypt = require('bcryptjs');
 
 //GET ALL USERS
