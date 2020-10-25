@@ -44,12 +44,9 @@ class Login extends React.Component {
             data: currentUser 
         })
         .then((res) => {
-            const user = res.data;
-            this.setState({
-                success: `Hello ${user.firstname} ${user.lastname}!`,
-                emptyMsg: "",
-                errorMsg: ""
-            })
+            const token = res.data.token;
+            localStorage.setItem('token', token);
+            this.props.history.push('/dashboard');
         })
         .catch((err) => {
             this.setState({
@@ -81,14 +78,11 @@ class Login extends React.Component {
                     value={this.state.password}
                     onChange={this.handleChange}/> 
             <br/>
-            <button>Submit</button>
+            <button>Login</button>
           </form>
-          <hr />
-          <Link to="/">Register</Link>
         </div>
       );
     }
-    
   }
   
   export default withRouter(Login);

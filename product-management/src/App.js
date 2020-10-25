@@ -49,7 +49,6 @@ class App extends React.Component {
             <Route path="/photolist/:id" render={(props) => <PhotoDetail {...props} updatePost={this.updatePost} photoList={this.state.photoList} />} />
             <Route path="/postphoto" render={(props) => <PostPhoto {...props} addToList={this.addToList} />} />
           </BrowserRouter>
-          
         </body>
       </div>
     );

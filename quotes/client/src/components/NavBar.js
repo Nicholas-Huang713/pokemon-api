@@ -1,51 +1,52 @@
 import React from 'react';
 import '../App.css';
-import logo from '../images/logo.png';
+// import logo from '../images/logo.png';
 import {withRouter, Link} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
-import {home, register, login, album, dashboard, favorites} from '../actions';
+// import {home, register, login, album, dashboard, favorites} from '../actions';
+import { makeStyles, withTheme } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  }
+}));
 
 function NavBar() {
     const currentPage = useSelector(state => state.currentPage)
     const dispatch = useDispatch();    
+    const classes = useStyles();
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <Link to="/" onClick={() => dispatch(home())} className="navbar-brand"><img src={logo} width="30" height="30" className="d-inline-block align-top" alt="logo" /> <span className="logo-font">ohSnap</span></Link>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarText">
-                {
-                    localStorage.getItem("token") ?
-                        <ul className="navbar-nav mr-auto">
-                            <li className={`${currentPage==="dashboard" ? "nav-item active" : "nav-item"}`}>
-                                <Link to="/dashboard" onClick={() => dispatch(dashboard())} className="nav-link">Home<span className="sr-only">(current)</span></Link>
-                            </li>
-                            <li className={`${currentPage==="album" ? "nav-item active" : "nav-item"}`}>
-                                <Link to="/album" onClick={() => dispatch(album())} className="nav-link">Album</Link>
-                            </li>
-                            <li className={`${currentPage==="favorites" ? "nav-item active" : "nav-item"}`}>
-                                <Link to="/favorites" onClick={() => dispatch(favorites())} className="nav-link">Favorites</Link>
-                            </li>
-                        </ul>
-                    : 
-                        <ul className="navbar-nav mr-auto">
-                            <li className={`${currentPage==="login" ? "nav-item active" : "nav-item"}`}>
-                                <Link to="/login" onClick={() => dispatch(login())} className="nav-link">Login</Link>
-                            </li>
-                            <li className={`${currentPage==="register" ? "nav-item active" : "nav-item"}`}>
-                                <Link to="/register" onClick={() => dispatch(register())} className="nav-link">Register</Link>
-                            </li>
-                        </ul>
-                }
-                {
+        <div className={classes.root}>
+            <AppBar position="static">
+                <Toolbar>
+                  <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                      <Link to="/"><Button variant="contained" color="primary">Home</Button></Link>
+                  </IconButton>
+                  <Link to="/register"><Button variant="contained" color="primary">Register</Button></Link>
+                  <Link to="/login"><Button variant="contained" color="primary">Login</Button></Link>
+                  {
+                    localStorage.getItem('token') &&
+                    <Link to="/dashboard"><Button variant="contained" color="primary">Dashboard</Button></Link>
+                  }
+                  {
                     localStorage.getItem("token") &&
-                        <span className="navbar-text">
-                            <Link to="/" onClick={() => localStorage.removeItem("token")} className="btn btn-light btn-sm text-dark">Signout</Link>
-                        </span>
-                }
-            </div>
-        </nav>
+                    <Link to="/" onClick={() => localStorage.removeItem("token")}><Button variant="contained" color="primary">Logout</Button></Link>
+                  }
+                </Toolbar>
+            </AppBar>
+        </div>
     );
 };
 

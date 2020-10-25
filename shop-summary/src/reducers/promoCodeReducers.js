@@ -4,7 +4,7 @@ const initialState = {
     open: false,
     value: ''
 };
-
+ 
 export default function(state = initialState, action){
     switch(action.type) {
         case PROMO_CODE:

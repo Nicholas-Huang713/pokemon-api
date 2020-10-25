@@ -11,6 +11,7 @@ function App() {
   return (
     <div className="App">
       <h1>Counter {counter} </h1>
+      <input type="number" value="" />
       <button onClick={() => dispatch(increment(5))}>+</button>
       <button onClick={() => dispatch(decrement(5))}>-</button>
       <h1>Logged In? : {loginState}</h1>
